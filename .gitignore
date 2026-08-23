@@ -4,3 +4,7 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 .DS_Store
+
+# Dataset files
+data/raw/
+data/processed/
