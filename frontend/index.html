@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing URL Detector</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+```
+<main class="container">
+
+    <section class="hero">
+        <div class="badge">AI SECURITY TOOL</div>
+
+        <h1>AI Phishing URL Detector</h1>
+
+        <p>
+            Analyze a URL with a machine-learning model trained to
+            identify potentially phishing and legitimate websites.
+        </p>
+    </section>
+
+    <section class="detector-card">
+
+        <label for="urlInput">Enter a URL</label>
+
+        <div class="input-group">
+            <input
+                type="text"
+                id="urlInput"
+                placeholder="https://example.com"
+                autocomplete="off"
+            >
+
+            <button id="analyzeBtn">
+                Analyze URL
+            </button>
+        </div>
+
+        <p class="hint">
+            Example: https://www.google.com
+        </p>
+
+        <div id="loading" class="loading hidden">
+            Analyzing URL...
+        </div>
+
+        <div id="result" class="result hidden">
+
+            <div class="result-header">
+                <span id="resultIcon">✓</span>
+                <h2 id="resultLabel">Legitimate</h2>
+            </div>
+
+            <div class="result-details">
+
+                <div class="detail">
+                    <span>URL</span>
+                    <strong id="resultUrl"></strong>
+                </div>
+
+                <div class="detail">
+                    <span>Prediction</span>
+                    <strong id="resultPrediction"></strong>
+                </div>
+
+                <div class="detail">
+                    <span>Confidence</span>
+                    <strong id="resultConfidence"></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="error" class="error hidden"></div>
+
+    </section>
+
+    <section class="info">
+
+        <div class="info-card">
+            <h3>URL Analysis</h3>
+            <p>
+                Examines URL characteristics and security-related
+                indicators.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3>Machine Learning</h3>
+            <p>
+                Uses a Random Forest classifier trained on the
+                PhiUSIIL phishing URL dataset.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3>Security Awareness</h3>
+            <p>
+                Use the result as an additional security signal,
+                not as a guarantee that a website is safe.
+            </p>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>AI Phishing URL Detector • AI + Cybersecurity Project</p>
+    </footer>
+
+</main>
+
+<script src="js/app.js"></script>
+```
+
+</body>
+</html>
