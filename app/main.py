@@ -12,12 +12,14 @@ app = FastAPI(
 )
 
 
-# Allow the local frontend to communicate with the API
+# CORS configuration
+# Allows both the local development frontend and the deployed Vercel frontend.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://127.0.0.1:5500",
         "http://localhost:5500",
+        "https://ai-phishing-url-detector.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
