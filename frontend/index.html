@@ -8,10 +8,8 @@
 ```
 <meta
     name="description"
-    content="AI-powered phishing URL detection using machine learning."
+    content="AI-powered phishing URL detection using machine learning and cybersecurity analysis."
 >
-
-<meta name="theme-color" content="#07111f">
 
 <title>PhishGuard AI — Phishing URL Detector</title>
 
@@ -25,28 +23,28 @@
 ```
 <!-- Background decoration -->
 <div class="background-grid"></div>
-<div class="background-glow glow-one"></div>
-<div class="background-glow glow-two"></div>
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
 
-<main class="container">
+<main class="page">
 
     <!-- ================= HEADER ================= -->
-    <header class="topbar">
+    <header class="navbar">
 
         <div class="brand">
             <div class="brand-icon">
                 <span>⌁</span>
             </div>
 
-            <div>
-                <div class="brand-name">PhishGuard AI</div>
-                <div class="brand-subtitle">AI Security Intelligence</div>
+            <div class="brand-text">
+                <strong>PhishGuard<span> AI</span></strong>
+                <small>AI SECURITY ANALYZER</small>
             </div>
         </div>
 
         <div class="status">
             <span class="status-dot"></span>
-            <span>System Online</span>
+            <span>API ONLINE</span>
         </div>
 
     </header>
@@ -55,155 +53,116 @@
     <!-- ================= HERO ================= -->
     <section class="hero">
 
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            AI-POWERED THREAT DETECTION
+        <div class="hero-badge">
+            <span class="pulse"></span>
+            MACHINE LEARNING • CYBERSECURITY
         </div>
 
         <h1>
-            Detect suspicious URLs
-            <span>before they become a threat.</span>
+            Detect Phishing
+            <span>Before It Tricks You.</span>
         </h1>
 
-        <p class="hero-description">
-            Analyze website URLs using a machine-learning security model
-            trained to identify patterns associated with phishing and
-            legitimate websites.
+        <p>
+            Analyze suspicious URLs using machine-learning features
+            designed to identify phishing and potentially legitimate
+            websites.
         </p>
-
-        <div class="hero-metrics">
-
-            <div class="metric">
-                <strong>ML</strong>
-                <span>Powered Detection</span>
-            </div>
-
-            <div class="metric-divider"></div>
-
-            <div class="metric">
-                <strong>RF</strong>
-                <span>Random Forest Model</span>
-            </div>
-
-            <div class="metric-divider"></div>
-
-            <div class="metric">
-                <strong>API</strong>
-                <span>Real-Time Analysis</span>
-            </div>
-
-        </div>
 
     </section>
 
 
     <!-- ================= DETECTOR ================= -->
-    <section class="detector-card">
+    <section class="detector-wrapper">
 
-        <div class="card-header">
+        <div class="detector-card">
 
-            <div>
-                <div class="section-label">URL SECURITY SCANNER</div>
+            <div class="card-top">
 
-                <h2>
-                    Analyze a website
-                </h2>
+                <div>
+                    <span class="eyebrow">URL THREAT ANALYSIS</span>
 
-                <p>
-                    Enter the URL you want to evaluate.
-                </p>
+                    <h2>
+                        Analyze a website
+                    </h2>
+
+                    <p>
+                        Enter a URL below and let the AI model evaluate
+                        its security characteristics.
+                    </p>
+                </div>
+
+                <div class="shield">
+                    <span>✓</span>
+                </div>
+
             </div>
 
-            <div class="shield">
-                <span>✓</span>
-            </div>
 
-        </div>
+            <label for="urlInput">
+                Website URL
+            </label>
 
+            <div class="input-wrapper">
 
-        <label for="urlInput">
-            Website URL
-        </label>
+                <span class="input-prefix">
+                    https://
+                </span>
 
-        <div class="input-wrapper">
-
-            <span class="input-prefix">https://</span>
-
-            <input
-                type="text"
-                id="urlInput"
-                placeholder="example.com"
-                autocomplete="off"
-                spellcheck="false"
-            >
-
-            <button
-                id="analyzeBtn"
-                type="button"
-            >
-                <span>Analyze URL</span>
-                <span class="button-arrow">→</span>
-            </button>
-
-        </div>
-
-        <div class="input-footer">
-
-            <p class="hint">
-                Try:
-                <button
-                    type="button"
-                    class="example-url"
-                    id="exampleUrl"
+                <input
+                    type="text"
+                    id="urlInput"
+                    placeholder="example.com"
+                    autocomplete="off"
+                    spellcheck="false"
                 >
-                    google.com
+
+                <button id="analyzeBtn">
+                    <span>Analyze</span>
+                    <span class="arrow">→</span>
                 </button>
-            </p>
 
-            <span class="secure-note">
-                <span>⌁</span>
-                Secure analysis
-            </span>
-
-        </div>
-
-
-        <!-- ================= LOADING ================= -->
-        <div
-            id="loading"
-            class="loading hidden"
-        >
-            <div class="scanner-animation">
-                <span></span>
             </div>
 
-            <div>
-                <strong>Analyzing URL</strong>
-                <p>Running machine-learning security checks...</p>
+
+            <div class="input-meta">
+
+                <span>
+                    🔒 Your URL is analyzed by the detection model.
+                </span>
+
+                <span>
+                    Press Enter ↵
+                </span>
+
             </div>
-        </div>
 
 
-        <!-- ================= RESULT ================= -->
-        <div
-            id="result"
-            class="result hidden"
-        >
+            <!-- Loading -->
+            <div id="loading" class="loading hidden">
 
-            <div class="result-top">
+                <div class="spinner"></div>
+
+                <div>
+                    <strong>Analyzing URL</strong>
+                    <span>Running machine-learning security checks...</span>
+                </div>
+
+            </div>
+
+
+            <!-- Result -->
+            <div id="result" class="result hidden">
 
                 <div class="result-status">
 
-                    <div
-                        id="resultIcon"
-                        class="result-icon"
-                    >
+                    <div id="resultIcon" class="result-icon">
                         ✓
                     </div>
 
                     <div>
-                        <span class="result-overline">
-                            SECURITY ASSESSMENT
+                        <span class="result-eyebrow">
+                            ANALYSIS COMPLETE
                         </span>
 
                         <h2 id="resultLabel">
@@ -213,88 +172,62 @@
 
                 </div>
 
-                <div class="confidence-badge">
-                    <span>Confidence</span>
-                    <strong id="resultConfidence">
-                        0%
-                    </strong>
+
+                <div class="result-grid">
+
+                    <div class="result-item result-url">
+
+                        <span>Analyzed URL</span>
+
+                        <strong id="resultUrl">
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Model Prediction</span>
+
+                        <strong id="resultPrediction">
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span>Confidence Score</span>
+
+                        <strong id="resultConfidence">
+                        </strong>
+
+                    </div>
+
                 </div>
 
             </div>
 
 
-            <div class="confidence-track">
-                <div
-                    id="confidenceBar"
-                    class="confidence-bar"
-                ></div>
-            </div>
-
-
-            <div class="result-details">
-
-                <div class="detail">
-                    <span class="detail-label">
-                        Analyzed URL
-                    </span>
-
-                    <strong
-                        id="resultUrl"
-                        class="url-value"
-                    ></strong>
-                </div>
-
-                <div class="detail">
-                    <span class="detail-label">
-                        Model Prediction
-                    </span>
-
-                    <strong
-                        id="resultPrediction"
-                    ></strong>
-                </div>
-
-                <div class="detail">
-                    <span class="detail-label">
-                        Detection Engine
-                    </span>
-
-                    <strong>
-                        Random Forest
-                    </strong>
-                </div>
-
-            </div>
-
-
-            <div class="result-advice">
-                <span class="advice-icon">!</span>
-
-                <p id="resultAdvice">
-                    Treat this result as a security signal rather than
-                    an absolute guarantee of website safety.
-                </p>
-            </div>
+            <!-- Error -->
+            <div id="error" class="error hidden"></div>
 
         </div>
-
-
-        <!-- ================= ERROR ================= -->
-        <div
-            id="error"
-            class="error hidden"
-            role="alert"
-        ></div>
 
     </section>
 
 
-    <!-- ================= SECURITY FEATURES ================= -->
+    <!-- ================= FEATURES ================= -->
     <section class="features">
 
         <div class="section-heading">
+
             <span>HOW IT WORKS</span>
-            <h2>Security intelligence behind the scanner</h2>
+
+            <h2>
+                AI-powered security analysis
+            </h2>
+
         </div>
 
 
@@ -302,67 +235,54 @@
 
             <article class="feature-card">
 
-                <div class="feature-number">
-                    01
-                </div>
-
                 <div class="feature-icon">
-                    ◇
+                    ◈
                 </div>
 
-                <h3>
-                    URL Feature Analysis
-                </h3>
+                <div>
+                    <h3>URL Intelligence</h3>
 
-                <p>
-                    The system evaluates structural and security-related
-                    characteristics extracted from the submitted URL.
-                </p>
+                    <p>
+                        Examines structural and security-related
+                        characteristics within a submitted URL.
+                    </p>
+                </div>
 
             </article>
 
 
             <article class="feature-card">
-
-                <div class="feature-number">
-                    02
-                </div>
 
                 <div class="feature-icon">
                     ◎
                 </div>
 
-                <h3>
-                    Machine Learning
-                </h3>
+                <div>
+                    <h3>Machine Learning</h3>
 
-                <p>
-                    A Random Forest classifier analyzes the extracted
-                    features and produces a phishing or legitimate
-                    prediction.
-                </p>
+                    <p>
+                        Uses a Random Forest classifier trained on
+                        phishing URL data from the PhiUSIIL dataset.
+                    </p>
+                </div>
 
             </article>
 
 
             <article class="feature-card">
 
-                <div class="feature-number">
-                    03
-                </div>
-
                 <div class="feature-icon">
                     ⛨
                 </div>
 
-                <h3>
-                    Security Awareness
-                </h3>
+                <div>
+                    <h3>Security Signal</h3>
 
-                <p>
-                    Results provide an additional security signal to help
-                    users make safer decisions when visiting websites.
-                </p>
+                    <p>
+                        Provides an additional signal for identifying
+                        potentially suspicious websites.
+                    </p>
+                </div>
 
             </article>
 
@@ -372,23 +292,25 @@
 
 
     <!-- ================= DISCLAIMER ================= -->
-    <section class="disclaimer">
+    <section class="security-note">
 
-        <div class="disclaimer-icon">
+        <div class="note-icon">
             !
         </div>
 
         <div>
+
             <strong>
-                Security Notice
+                Security awareness notice
             </strong>
 
             <p>
-                No automated classifier can guarantee that a website is
-                completely safe or malicious. Always verify suspicious
-                links and avoid entering sensitive information on
-                unfamiliar websites.
+                This tool provides a machine-learning prediction and
+                should not be treated as a definitive security verdict.
+                Always verify suspicious links through additional
+                trusted security sources.
             </p>
+
         </div>
 
     </section>
@@ -397,13 +319,16 @@
     <!-- ================= FOOTER ================= -->
     <footer>
 
-        <div>
-            <strong>PhishGuard AI</strong>
-            <span>AI + Cybersecurity Project</span>
+        <div class="footer-brand">
+            PhishGuard AI
         </div>
 
+        <p>
+            AI + Cybersecurity Project
+        </p>
+
         <span>
-            Machine Learning Security Analysis
+            Machine Learning • FastAPI • Security
         </span>
 
     </footer>
