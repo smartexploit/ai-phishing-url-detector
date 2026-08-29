@@ -65,6 +65,13 @@ async function analyzeURL() {
         resultLabel.textContent = data.label;
         resultConfidence.textContent =
             (data.confidence * 100).toFixed(2) + "%";
+            const confidenceFill =
+    document.querySelector(".confidence-fill");
+
+if (confidenceFill) {
+    confidenceFill.style.width =
+        (data.confidence * 100) + "%";
+}
 
         if (data.label === "Phishing") {
 
