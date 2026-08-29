@@ -1,49 +1,19 @@
-const API_URL =
-"https://ai-phishing-url-detector-msrc.onrender.com";
+const API_URL = "https://ai-phishing-url-detector-msrc.onrender.com";
 
-/* =========================================================
-DOM ELEMENTS
-========================================================= */
+const urlInput = document.getElementById("urlInput");
+const analyzeBtn = document.getElementById("analyzeBtn");
 
-const urlInput =
-document.getElementById("urlInput");
+const loading = document.getElementById("loading");
+const result = document.getElementById("result");
+const errorBox = document.getElementById("error");
+const errorMessage = document.getElementById("errorMessage");
 
-const analyzeBtn =
-document.getElementById("analyzeBtn");
-
-const loading =
-document.getElementById("loading");
-
-const result =
-document.getElementById("result");
-
-const errorBox =
-document.getElementById("error");
-
-const resultIcon =
-document.getElementById("resultIcon");
-
-const resultLabel =
-document.getElementById("resultLabel");
-
-const resultUrl =
-document.getElementById("resultUrl");
-
-const resultPrediction =
-document.getElementById("resultPrediction");
-
-const resultConfidence =
-document.getElementById("resultConfidence");
-
-const confidenceBar =
-document.getElementById("confidenceBar");
-
-const exampleUrl =
-document.getElementById("exampleUrl");
-
-/* =========================================================
-UI HELPERS
-========================================================= */
+const resultIcon = document.getElementById("resultIcon");
+const resultLabel = document.getElementById("resultLabel");
+const resultUrl = document.getElementById("resultUrl");
+const resultPrediction = document.getElementById("resultPrediction");
+const resultConfidence = document.getElementById("resultConfidence");
+const confidenceBar = document.getElementById("confidenceBar");
 
 function show(element) {
 element.classList.remove("hidden");
@@ -53,163 +23,61 @@ function hide(element) {
 element.classList.add("hidden");
 }
 
-/* =========================================================
-NORMALIZE URL
-========================================================= */
-
-function normalizeURL(value) {
+function resetResult() {
+hide(result);
+hide(errorBox);
 
 ```
-let url = value.trim();
-
-if (!url) {
-    return "";
-}
-
-/*
- * The API expects a URL string.
- * If the user enters example.com instead of
- * https://example.com, add the scheme.
- */
-if (!/^https?:\/\//i.test(url)) {
-    url = "https://" + url;
-}
-
-return url;
+confidenceBar.style.width = "0%";
 ```
 
 }
 
-/* =========================================================
-RESET RESULT COLORS
-========================================================= */
-
-function resetResultStyle() {
+function setResultTheme(label) {
 
 ```
-resultIcon.style.background =
-    "rgba(72,215,165,0.12)";
-
-resultIcon.style.color =
-    "#48d7a5";
-
-resultLabel.style.color =
-    "#f2f7fc";
-
-confidenceBar.style.background =
-    "#48d7a5";
-
-resultConfidence.style.color =
-    "#48d7a5";
-```
-
-}
-
-/* =========================================================
-DISPLAY RESULT
-========================================================= */
-
-function displayResult(data) {
-
-```
-const confidence =
-    Number(data.confidence || 0);
-
-const confidencePercent =
-    Math.max(
-        0,
-        Math.min(
-            confidence * 100,
-            100
-        )
-    );
-
-
-resultUrl.textContent =
-    data.url || "Unknown";
-
-resultPrediction.textContent =
-    data.prediction || "Unknown";
-
-resultLabel.textContent =
-    data.label || "Unknown";
-
-resultConfidence.textContent =
-    confidencePercent.toFixed(2) + "%";
-
-
-resetResultStyle();
-
-
-if (
-    String(data.label).toLowerCase()
-    === "phishing"
-) {
+if (label === "Phishing") {
 
     resultIcon.textContent = "!";
 
-    resultIcon.style.background =
-        "rgba(255,104,117,0.12)";
+    resultIcon.style.background = "rgba(239, 68, 68, 0.12)";
+    resultIcon.style.color = "#f87171";
 
-    resultIcon.style.color =
-        "#ff6875";
+    result.style.borderColor = "rgba(239, 68, 68, 0.22)";
+    result.style.background = "rgba(239, 68, 68, 0.025)";
 
-    resultLabel.style.color =
-        "#ff6875";
+    confidenceBar.style.background = "#ef4444";
 
-    confidenceBar.style.background =
-        "#ff6875";
-
-    resultConfidence.style.color =
-        "#ff6875";
+    resultLabel.style.color = "#f87171";
 
 } else {
 
     resultIcon.textContent = "✓";
+
+    resultIcon.style.background = "rgba(34, 197, 94, 0.12)";
+    resultIcon.style.color = "#4ade80";
+
+    result.style.borderColor = "rgba(34, 197, 94, 0.17)";
+    result.style.background = "rgba(34, 197, 94, 0.025)";
+
+    confidenceBar.style.background = "#22c55e";
+
+    resultLabel.style.color = "#f1f5f9";
 }
-
-
-/*
- * Animate the confidence meter.
- */
-confidenceBar.style.width = "0%";
-
-requestAnimationFrame(() => {
-
-    setTimeout(() => {
-
-        confidenceBar.style.width =
-            confidencePercent + "%";
-
-    }, 80);
-
-});
-
-
-show(result);
 ```
 
 }
-
-/* =========================================================
-ANALYZE URL
-========================================================= */
 
 async function analyzeURL() {
 
 ```
-const rawURL =
-    urlInput.value.trim();
+const url = urlInput.value.trim();
 
+resetResult();
 
-hide(result);
-hide(errorBox);
+if (!url) {
 
-
-if (!rawURL) {
-
-    errorBox.textContent =
-        "Please enter a URL to analyze.";
+    errorMessage.textContent = "Please enter a URL to analyze.";
 
     show(errorBox);
 
@@ -219,110 +87,121 @@ if (!rawURL) {
 }
 
 
-const url =
-    normalizeURL(rawURL);
-
-
 show(loading);
 
 analyzeBtn.disabled = true;
 
-analyzeBtn.querySelector("span:first-child")
-    .textContent = "Analyzing...";
-
 
 try {
 
-    const response =
-        await fetch(
-            API_URL + "/predict",
-            {
-                method: "POST",
+    const response = await fetch(`${API_URL}/predict`, {
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+        method: "POST",
 
-                body: JSON.stringify({
-                    url: url
-                })
-            }
-        );
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            url: url
+        })
+
+    });
 
 
     let data;
 
     try {
-
-        data =
-            await response.json();
-
+        data = await response.json();
     } catch {
-
-        throw new Error(
-            "The prediction service returned an invalid response."
-        );
+        throw new Error("The prediction API returned an invalid response.");
     }
 
 
     if (!response.ok) {
 
         throw new Error(
-            data.detail ||
-            "Unable to analyze the URL."
+            data.detail || "Unable to analyze the submitted URL."
         );
     }
 
 
-    displayResult(data);
+    const confidence =
+        Number(data.confidence || 0);
 
 
-} catch (error) {
+    const confidencePercent =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                confidence * 100
+            )
+        );
 
-    console.error(
-        "Prediction error:",
-        error
-    );
+
+    resultUrl.textContent =
+        data.url || url;
 
 
-    errorBox.textContent =
+    resultPrediction.textContent =
+        data.prediction || "N/A";
+
+
+    resultLabel.textContent =
+        data.label || "Unknown";
+
+
+    resultConfidence.textContent =
+        `${confidencePercent.toFixed(2)}%`;
+
+
+    setResultTheme(data.label);
+
+
+    show(result);
+
+
+    requestAnimationFrame(() => {
+
+        confidenceBar.style.width =
+            `${confidencePercent}%`;
+
+    });
+
+}
+
+
+catch (error) {
+
+    errorMessage.textContent =
         error.message ||
         "Could not connect to the prediction API.";
 
-
     show(errorBox);
 
+}
 
-} finally {
+
+finally {
 
     hide(loading);
 
     analyzeBtn.disabled = false;
 
-    analyzeBtn.querySelector("span:first-child")
-        .textContent = "Analyze URL";
 }
 ```
 
 }
-
-/* =========================================================
-ANALYZE BUTTON
-========================================================= */
 
 analyzeBtn.addEventListener(
 "click",
 analyzeURL
 );
 
-/* =========================================================
-ENTER KEY
-========================================================= */
-
 urlInput.addEventListener(
 "keydown",
-function(event) {
+(event) => {
 
 ```
     if (event.key === "Enter") {
@@ -330,38 +209,10 @@ function(event) {
         event.preventDefault();
 
         analyzeURL();
+
     }
+
 }
 ```
 
 );
-
-/* =========================================================
-EXAMPLE URL
-========================================================= */
-
-if (exampleUrl) {
-
-```
-exampleUrl.addEventListener(
-    "click",
-    function() {
-
-        urlInput.value =
-            "https://www.google.com";
-
-        urlInput.focus();
-    }
-);
-```
-
-}
-
-/* =========================================================
-INITIAL STATE
-========================================================= */
-
-hide(result);
-hide(loading);
-hide(errorBox);
-resetResultStyle();
